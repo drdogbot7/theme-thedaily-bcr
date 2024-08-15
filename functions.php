@@ -22,11 +22,13 @@ function thedaily_random_featured_records_html($recordType, $featuredRecords)
     return $html;
 }
 
-function thedaily_get_random_featured_records($record, $num = 0, $hasImage = true)
+function thedaily_get_random_featured_records($record, $num = 10, $hasImage = true)
 {
     return get_records($record, array('featured' => 1,
                                      'sort_field' => 'random',
-                                     'hasImage' => $hasImage), $num);
+                                     'hasImage' => $hasImage),
+                                     get_theme_option('number_to_show')
+                                    );
 }
 
 function thedaily_display_featured_records() 

@@ -1,5 +1,5 @@
 {
-  "name": "thedaily",
+  "name": "thedaily-bcr",
   "version": "1.6.2",
   "description": "\"Image-oriented theme for Omeka.\"",
   "main": "gulpfile.js",
@@ -16,7 +16,9 @@
     "susy": "^2.2.12"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "gulp css",
+    "start": "gulp css:watch"
   },
   "repository": {
     "type": "git",

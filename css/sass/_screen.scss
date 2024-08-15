@@ -477,40 +477,57 @@ header a {
 
 /* @group ----- Home ----- */
 
-div#featured {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+#featured {
+    display: grid;
+    gap: $spacing-unit;
+    grid-template-columns: 1fr;
+    grid-auto-flow: dense;
+    // background-size: cover;
+    // background-position: center;
+    // background-repeat: no-repeat;
 }
 
-#featured .record:first-child {
-    height: 60vh;
+@media screen and (min-width: 800px) {
+    #featured {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-#featured .record:first-child,
-#featured.layout-2 .record:nth-child(2),
-#featured .record:nth-child(6n),
-#featured .record:nth-child(6n+1) {
-    width: 100%;
+@media screen and (min-width: 1140px) {
+    #featured {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 #featured .record {
-    margin-bottom: $spacing-unit;
-    color: #fff;
+    aspect-ratio:3/2;
+    // margin-bottom: $spacing-unit;
+    // color: #fff;
     overflow: hidden;
     position: relative;
     display: flex;
-    align-content: center;
     align-items: center;
     justify-content: center;
     background-color: #e7e7e7;
     z-index: 0;
-    padding: $spacing-unit;
-    min-height: 30vh;
-    width: calc(50% - #{(.5 * $spacing-unit)});
+    overflow:hidden;
+}
+@media screen and (min-width: 800px) and (max-width:1139px) {
+    #featured .record:nth-child(1) {
+        grid-column: span 2;
+        aspect-ratio: 2/1;
+    }
+}
+
+@media screen and (min-width: 1140px) {
+    #featured .record:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    #featured .record:nth-child(8) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
 }
 
 #featured .record a {
@@ -519,7 +536,7 @@ div#featured {
 
 #featured .featured-meta {
     padding: 0 $spacing-unit;
-    max-width: 75%;
+    max-width: 80%;
 }
 
 #featured .featured-meta > * {
@@ -538,25 +555,36 @@ div#featured {
 }
 
 #featured .record img {
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    top:0;
+    left:0;
+    object-fit: cover;
+    object-position: center;
     z-index: -1;
     opacity: .4;
-    transition: opacity .2s ease-in-out;
 }
 
 #featured .record:hover img {
+    transition: all .2s ease-in-out;
     opacity: 1;
+    transform:scale(1.05);
 }
+
 
 #intro {
     background-color: $primary-color;
-    margin: (-1 * $spacing-unit) (-2 * $spacing-unit) (2 * $spacing-unit) (-2 * $spacing-unit);
-    padding: (2 * $spacing-unit);
+    margin: (-1 * $spacing-unit) (-1 * $spacing-unit) (2 * $spacing-unit) (-1 * $spacing-unit);
+    padding: (1* $spacing-unit);
+}
+
+@media screen and (min-width:800px) {
+    #intro {
+        background-color: $primary-color;
+        margin: (-1 * $spacing-unit) (-2 * $spacing-unit) (2 * $spacing-unit) (-2 * $spacing-unit);
+        padding: (2 * $spacing-unit);
+    }
 }
 
 #featured + #intro {
@@ -1129,3 +1157,16 @@ body.menu-open {
 }
 
 /* @end */
+
+
+/**
+ * Make pdf embed suck less.
+*/
+#itemfiles.lightgallery {
+    aspect-ratio:3/2;
+    width:100%;
+    height:auto;
+    max-height:90dvh;
+    max-width:1280px;
+    margin-inline: auto;
+}
